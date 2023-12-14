@@ -5,10 +5,9 @@ import Header from '../../Components/HomeScreen/Header/Header';
 import PostView from '../../Components/HomeScreen/PostView/PostView';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/Store';
-import {Post} from '../../redux/slices/PostSlice';
 
 const HomeScreen = () => {
-  const userId = useSelector((state: RootState) => state.setuser);
+  const loggedInuserId = useSelector((state: RootState) => state.setuser);
   const users = useSelector((state: RootState) => state.user);
   const posts = useSelector((state: RootState) => state.posts);
 
@@ -21,11 +20,13 @@ const HomeScreen = () => {
     const target = users.find(item => item.Id === userId);
     return target?.Username;
   };
-
-  const following = users.filter(item => item.Followers?.includes(userId));
+  const following = users.filter(item =>
+    item.Followers?.includes(loggedInuserId),
+  );
   const FollowingUserId = following.map(item => {
     return item.Id;
   });
+
   const Data = posts.filter(post => FollowingUserId?.includes(post.UserId));
 
   return (
@@ -36,10 +37,14 @@ const HomeScreen = () => {
           return (
             <PostView
               key={index}
+              userId={item.UserId}
+              postId={item.PostId}
               dp={fetchUserDp({userId: item.UserId})}
               username={fetchUserName({userId: item.UserId})}
               img={item.Img}
               description={item.Description}
+              saved={item.Saved?.includes(loggedInuserId) ? true : false}
+              liked={item.liked?.includes(loggedInuserId) ? true : false}
             />
           );
         })}

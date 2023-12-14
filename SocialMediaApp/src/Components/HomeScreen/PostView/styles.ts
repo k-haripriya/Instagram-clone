@@ -50,7 +50,13 @@ export const styles = StyleSheet.create({
         fontSize:15,
         color:'white',
         fontWeight:'300',
-        marginRight:100,
+        maxWidth:270,
         marginTop:3,
     },
+    commentsView:{
+        marginTop:10,
+    },
+    commentsText:{
+        color:'white',
+    }
 })

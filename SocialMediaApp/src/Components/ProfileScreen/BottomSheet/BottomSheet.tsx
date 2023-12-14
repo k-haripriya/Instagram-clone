@@ -5,7 +5,7 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import { BottomSheetType } from '../../../Types/Types';
 
 const BottomSheet = (props:BottomSheetType) => {
-    const { handleModal, isModalVisible, handleLogout } = props
+    const { handleModal, isModalVisible, handleLogout, handleSavedPosts,handleSettingsScreen } = props
     
     const Items = [
         {
@@ -32,7 +32,7 @@ const BottomSheet = (props:BottomSheetType) => {
               Items.map((item,index)=>{
                 return(
                   <View key={index}>
-                    <TouchableOpacity style={styles.items} onPress={()=>handleLogout()}>
+                    <TouchableOpacity style={styles.items} onPress={item.name === 'Saved' ? ()=>handleSavedPosts() : item.name === 'Settings' ? ()=>handleSettingsScreen() : ()=>handleLogout()}>
                     <IonIcons name={item.iconName} size={22} color={'white'}/>
                     <Text style={styles.itemname}>{item.name}</Text>
                     </TouchableOpacity>

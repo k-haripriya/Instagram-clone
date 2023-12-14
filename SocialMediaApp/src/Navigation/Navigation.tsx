@@ -5,6 +5,7 @@ import { NavigationStackParams } from '../Types/Types';
 import SplashScreen from '../Screens/SplashScreen/SplashScreen';
 import MainScreen from '../Screens/MainScreen/MainScreen';
 import LoginScreen from '../Screens/LoginScreen/LoginScreen';
+import SavedPostsScreen from '../Screens/SavedPostsScreen/SavedPostsScreen';
 
 const Navigation = () => {
     const Stack = createNativeStackNavigator<NavigationStackParams>();
@@ -14,6 +15,7 @@ const Navigation = () => {
             <Stack.Screen name='SplashScreen' component={SplashScreen}/>
             <Stack.Screen name='LoginScreen' component={LoginScreen}/>
             <Stack.Screen name='MainScreen' component={MainScreen}/>
+
         </Stack.Navigator>
     </NavigationContainer>
   )

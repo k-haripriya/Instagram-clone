@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Touchable, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import profile from '../../../Images/Jpg/profile.jpg'
@@ -10,7 +10,7 @@ import {RootState} from '../../../redux/Store';
 import {User, followuser, removeFollower, unfollowuser} from '../../../redux/slices/UserSlice';
 
 const Friends = (props: FriendsType) => {
-  const {type} = props;
+  const {type, handleSetUser} = props;
   const dispatch = useDispatch();
   const [Data, setData] = useState<User[]>();
   const users = useSelector((state: RootState) => state.user);
@@ -54,9 +54,7 @@ const Friends = (props: FriendsType) => {
     dispatch(removeFollower({userId:userId, followerId:id}));
   }
 
-  const onClick = () => {
-    console.log('bbb');
-  };
+  
 
   useEffect(() => {
     fetchData();
@@ -66,7 +64,8 @@ const Friends = (props: FriendsType) => {
     <View>
       {Data?.map((item, index) => {
         return (
-          <View key={index} style={styles.container}>
+          <TouchableOpacity key={index} onPress={()=>handleSetUser()}>
+          <View  style={styles.container}>
             <View style={styles.view1}>
               {item?.Dp !== profile ? (
                 <Image
@@ -98,6 +97,7 @@ const Friends = (props: FriendsType) => {
               <IonIcons name="ellipsis-vertical" color={'white'} size={28} />
             </View>
           </View>
+          </TouchableOpacity>
         );
       })}
     </View>

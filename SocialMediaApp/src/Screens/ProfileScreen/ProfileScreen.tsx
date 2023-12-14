@@ -25,6 +25,8 @@ import {NavigationStackParams} from '../../Types/Types';
 import {useDispatch} from 'react-redux';
 import {setuser} from '../../redux/slices/setUserSlice';
 import PhotoModal from '../../Components/ProfileScreen/PhotoModal/PhotoModal';
+import SavedPostsScreen from '../SavedPostsScreen/SavedPostsScreen';
+import SettingsScreen from '../SettingsScreen/SettingsScreen';
 
 const ProfileScreen = ({
   navigation,
@@ -39,6 +41,9 @@ const ProfileScreen = ({
 
   const [isPhotoVisible, setIsPhotoVisible] = useState(false);
   const [ visiblePhoto, setVisiblePhoto ] = useState();
+
+  const [isSavedScreeOpen, setISSavedScreeenOpen ] = useState(false);
+  const [ isSettingsOpen, setIsSettingsOpen ] = useState(false);
 
   const handleVisible = () => {
     setIsPhotoVisible(!isPhotoVisible);
@@ -56,6 +61,15 @@ const ProfileScreen = ({
     dispatch(setuser(''));
     navigation.navigate('LoginScreen');
   };
+  
+  const handleSavedPosts = () => {
+    // navigation.navigate('SavedPostsScreen');
+    setISSavedScreeenOpen(!isSavedScreeOpen);
+  }
+
+  const handleSettingsScreen = () =>{
+    setIsSettingsOpen(!isSettingsOpen);
+  }
 
   const openImagePicker = () => {
     const options: ImageLibraryOptions = {
@@ -100,12 +114,16 @@ const ProfileScreen = ({
         handleModal={handleModal}
         isModalVisible={isModalVisible}
         handleLogout={handleLogout}
+        handleSavedPosts={handleSavedPosts}
+        handleSettingsScreen={handleSettingsScreen}
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
         <EditScreen isEdit={isEdit} handleEdit={handleEdit} />
       </KeyboardAvoidingView>
       <PhotoModal isPhotoVisible={isPhotoVisible} photo={visiblePhoto} handleVisible={handleVisible}/>
+      <SavedPostsScreen isSavedScreenOpen={isSavedScreeOpen} handleSavedPosts={handleSavedPosts}/>
+      <SettingsScreen isSettingsOpen={isSettingsOpen}/>
     </View>
   );
 };

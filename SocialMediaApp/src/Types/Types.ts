@@ -37,6 +37,10 @@ export type Posts = {
     username:string | undefined,
     img:any,
     description:string | undefined,
+    userId: any,
+    saved: boolean,
+    liked:boolean,
+    postId:any
 }
 export type Button = {
     name:string,
@@ -53,6 +57,8 @@ export type BottomSheetType = {
     handleModal : Function,
     isModalVisible: boolean,
     handleLogout:Function,
+    handleSavedPosts:Function,
+    handleSettingsScreen :Function
 }
 
 export type DisplayType = {
@@ -103,6 +109,7 @@ export type CategoryType = {
 
 export type FriendsType = {
     type:string,
+    handleSetUser: Function,
 }
 
 export type FollowUserType = {
@@ -123,4 +130,34 @@ export type PhotoModalType = {
     isPhotoVisible:boolean,
     photo:any,
     handleVisible:Function
+}
+
+export type SavePosts = {
+    isSavedScreenOpen:boolean,
+    handleSavedPosts:Function,
+}
+
+export type CommentsType = {
+    isCommentsVisible: boolean,
+    handleComments:Function,
+    postId:any,
+}
+
+export type AddCommentType = {
+    postId:any;
+    comment:string;
+    userId:any;
+}
+
+export type CommentsPageType = {
+    postId: any;
+}
+
+export type commentcardType = {
+    userId:any;
+    comment:string;
+}
+
+export type settingsScreenType = {
+    isSettingsOpen:boolean,
 }

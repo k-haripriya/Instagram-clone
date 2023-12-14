@@ -86,7 +86,9 @@ export const UserSlice = createSlice ({
             {
                 selectedUser.Followers = selectedUser?.Followers?.filter((item)=>item!==action.payload.followerId);
             }
-        }
+        },
+
+        
         
         
     }
